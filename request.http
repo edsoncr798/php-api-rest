@@ -1,4 +1,4 @@
-GET http://localhost/php-api-rest/api/v1/employers.php?id=15
+GET http://localhost/php-api-rest/api/v1/employers.php
 Accept: application/json
 
 ### POST request to create a new user

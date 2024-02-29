@@ -52,17 +52,24 @@ class EmployerController {
     public function readSingle($id) {
         header("Access-Control-Allow-Methods: GET");
 
+        $this->items->id = isset($_GET['id']) ? $_GET['id'] : die();
         $this->items->getEmployer($id);
-        $employer_item = array(
-            "id" => $this->items->id,
-            "name" => $this->items->name,
-            "email" => $this->items->email,
-            "age" => $this->items->age,
-            "designation" => $this->items->designation,
-            "created" => $this->items->created,
-        );
-        http_response_code(200);
-        echo json_encode($employer_item);
+
+        if($this->items->name != null) {
+            $employer_arr = array(
+                "id" => $this->items->id,
+                "name" => $this->items->name,
+                "email" => $this->items->email,
+                "age" => $this->items->age,
+                "designation" => $this->items->designation,
+                "created" => $this->items->created,
+            );
+            http_response_code(200);
+            echo json_encode($employer_arr);
+        } else {
+            http_response_code(404);
+            echo json_encode(array("message" => "Employer does not exist."));
+        }
     }
     //Create employer
     public function create() {
